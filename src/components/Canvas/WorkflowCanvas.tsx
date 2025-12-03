@@ -28,7 +28,7 @@ const nodeTypes = {
 export const WorkflowCanvas = () => {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect, addNode } =
     useWorkflowContext();
-  const { project } = useReactFlow();
+  const { screenToFlowPosition } = useReactFlow();
 
   const onDragOver = useCallback((event: React.DragEvent) => {
     event.preventDefault();
@@ -41,15 +41,14 @@ export const WorkflowCanvas = () => {
       const type = event.dataTransfer.getData("application/reactflow");
       if (typeof type === "undefined" || !type) return;
 
-      const bounds = (event.target as HTMLElement).getBoundingClientRect();
-      const position = project({
-        x: event.clientX - bounds.left,
-        y: event.clientY - bounds.top,
+      const position = screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
       });
 
       addNode(type, position);
     },
-    [project, addNode]
+    [screenToFlowPosition, addNode]
   );
 
   return (

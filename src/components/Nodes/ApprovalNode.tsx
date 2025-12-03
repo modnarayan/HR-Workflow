@@ -3,8 +3,15 @@ import { CheckCircle } from "lucide-react";
 import type { ApprovalNodeData } from "@/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const ApprovalNode = ({ data }: NodeProps<ApprovalNodeData>) => (
-  <Card className="w-40 bg-purple-50 border-purple-200">
+export const ApprovalNode = ({
+  data,
+  selected,
+}: NodeProps<ApprovalNodeData>) => (
+  <Card
+    className={`w-40 bg-purple-50 border-2 transition-all cursor-pointer ${
+      selected ? "border-purple-600 shadow-lg" : "border-purple-200"
+    }`}
+  >
     <Handle type="target" position={Position.Left} />
     <Handle type="source" position={Position.Right} />
     <CardContent className="p-2 text-center">

@@ -26,7 +26,7 @@ export const TestPanel = () => {
         <Button
           onClick={runSimulation}
           disabled={loading}
-          className="w-full gap-2"
+          className="w-full gap-2 cursor-pointer"
         >
           <Play className="h-4 w-4" />
           {loading ? "Simulating..." : "Simulate Workflow"}

@@ -18,20 +18,22 @@ A functional prototype of a visual HR Workflow Designer built with React, React 
   - Form-specific fields for each node type
   - Real-time state management with React Hook Form
   - Custom field support for extensibility
+  - **Special Note**: End Node includes "Include Summary Report" toggle to generate completion summaries
 - **Drag-and-Drop Node Insertion**: Sidebar with all available node types
-- **Edge Management**: Connect nodes with automatic edge creation
-- **Node Editing Panel**: Select and edit node properties in real-time
+- **Edge Management**: Connect nodes with automatic edge creation and proper IDs
+- **Node Editing Panel**: Select and edit node properties in real-time (click any node to edit)
 - **Workflow Simulation & Testing**:
   - Serialize workflow to JSON
   - Mock API simulation endpoint
   - Step-by-step execution logging
   - Validation with error reporting
-  - Cycle detection
+  - Cycle detection (prevents invalid workflows)
 - **Mock API Layer**:
   - `/automations` - Returns available automation actions
-  - `/simulate` - Simulates workflow execution
+  - `/simulate` - Simulates workflow execution with full step tracking
 - **UI Components**: Built with shadcn/ui Card, Button, Input components
 - **Icons**: Lucide React icons for visual distinction
+- **Visual Feedback**: Selected nodes highlight with border and shadow
 
 ## 📁 Project Structure
 

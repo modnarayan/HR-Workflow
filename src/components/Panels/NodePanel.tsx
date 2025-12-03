@@ -6,6 +6,7 @@ import { ApprovalForm } from "@/components/Forms/ApprovalForm";
 import { AutomatedForm } from "@/components/Forms/AutomatedForm";
 import { EndForm } from "@/components/Forms/EndForm";
 import type { NodeType } from "@/lib/types";
+import { useWorkflowContext } from "@/providers/WorkflowProvider";
 
 const formComponents: Record<
   NodeType,
@@ -19,8 +20,12 @@ const formComponents: Record<
 };
 
 export const NodePanel = () => {
+  const { nodes } = useWorkflowContext();
   const { getNodes } = useReactFlow();
-  const selected = getNodes().find((n) => n.selected);
+
+  // Get selected node from React Flow
+  const flowNodes = getNodes();
+  const selected = flowNodes.find((n) => n.selected);
 
   if (!selected) return <div className="w-80 p-4">Select a node to edit</div>;
 

@@ -3,8 +3,12 @@ import { Users } from "lucide-react";
 import type { TaskNodeData } from "@/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const TaskNode = ({ data }: NodeProps<TaskNodeData>) => (
-  <Card className="w-40 bg-blue-50 border-blue-200">
+export const TaskNode = ({ data, selected }: NodeProps<TaskNodeData>) => (
+  <Card
+    className={`w-40 bg-blue-50 border-2 transition-all cursor-pointer ${
+      selected ? "border-blue-600 shadow-lg" : "border-blue-200"
+    }`}
+  >
     <Handle type="target" position={Position.Left} />
     <Handle type="source" position={Position.Right} />
     <CardContent className="p-2 text-center">

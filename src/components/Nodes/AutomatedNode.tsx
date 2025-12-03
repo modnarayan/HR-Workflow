@@ -3,8 +3,15 @@ import { Zap } from "lucide-react";
 import type { AutomatedNodeData } from "@/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const AutomatedNode = ({ data }: NodeProps<AutomatedNodeData>) => (
-  <Card className="w-40 bg-amber-50 border-amber-200">
+export const AutomatedNode = ({
+  data,
+  selected,
+}: NodeProps<AutomatedNodeData>) => (
+  <Card
+    className={`w-40 bg-amber-50 border-2 transition-all cursor-pointer ${
+      selected ? "border-amber-600 shadow-lg" : "border-amber-200"
+    }`}
+  >
     <Handle type="target" position={Position.Left} />
     <Handle type="source" position={Position.Right} />
     <CardContent className="p-2 text-center">

@@ -61,19 +61,38 @@ export const useWorkflow = () => {
     console.log("Validating workflow:", workflow);
     if (!workflow.nodes.some((n) => n.type === "start"))
       errors.push("Missing start node");
-    // Simple cycle check (expand from api.ts if needed)
-    const visited = new Set();
-    const traverse = (nodeId: string) => {
-      if (visited.has(nodeId)) return true;
-      visited.add(nodeId);
-      const children = workflow.edges
-        .filter((e) => e.source === nodeId)
-        .map((e) => e.target);
-      return children.some(traverse);
+
+    // Cycle check: for each node, traverse its descendants
+    const hasCycle = (startNodeId: string): boolean => {
+      const visited = new Set<string>();
+      const recursionStack = new Set<string>();
+
+      const traverse = (nodeId: string): boolean => {
+        if (recursionStack.has(nodeId)) return true; // Cycle detected
+        if (visited.has(nodeId)) return false; // Already checked, no cycle
+
+        visited.add(nodeId);
+        recursionStack.add(nodeId);
+
+        const children = workflow.edges
+          .filter((e) => e.source === nodeId)
+          .map((e) => e.target);
+
+        for (const childId of children) {
+          if (traverse(childId)) return true;
+        }
+
+        recursionStack.delete(nodeId);
+        return false;
+      };
+
+      return traverse(startNodeId);
     };
-    workflow.nodes.forEach((n) => {
-      if (traverse(n.id)) errors.push("Cycle detected");
-    });
+
+    if (workflow.nodes.some((n) => hasCycle(n.id))) {
+      errors.push("Cycle detected");
+    }
+
     return errors;
   }, []);
 
