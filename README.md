@@ -95,7 +95,11 @@ src/
 ### Installation
 
 ```bash
-cd tredence
+git clone https://github.com/modnarayan/HR-Workflow.git
+```
+
+```bash
+cd HR-Workflow
 npm install
 ```
 
