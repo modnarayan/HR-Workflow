@@ -58,7 +58,7 @@ export const AutomatedForm = ({ nodeId }: { nodeId: string }) => {
   if (loading) return <div className="p-4">Loading actions...</div>;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
       <div>
         <label className="block text-sm font-medium">Title</label>
         <Input {...register("title")} placeholder="Automated step title" />

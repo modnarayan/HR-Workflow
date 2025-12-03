@@ -20,6 +20,9 @@ export const simulateWorkflow = async (
   const startNode = nodes.find((n) => n.type === "start");
   if (!startNode) return { steps: [], valid: false, errors: ["No start node"] };
 
+  const endNode = nodes.find((n) => n.type === "end") as any;
+  const shouldGenerateSummary = endNode?.summary === true;
+
   const graph = new Map(
     nodes.map((n) => [
       n.id,
@@ -73,5 +76,32 @@ export const simulateWorkflow = async (
   const endNodes = nodes.filter((n) => n.type === "end");
   if (endNodes.length === 0) errors.push("No end node");
 
-  return { steps, valid: valid && errors.length === 0, errors };
+  const result: SimulationResult = {
+    steps,
+    valid: valid && errors.length === 0,
+    errors,
+  };
+
+  // Generate summary if End Node has summary flag enabled
+  if (shouldGenerateSummary && result.valid) {
+    const completedSteps = steps.filter((s) => s.status === "completed").length;
+    result.summary = {
+      generatedAt: new Date().toLocaleString(),
+      totalSteps: steps.length,
+      completedSteps,
+      workflowStatus: result.valid ? "success" : "failed",
+      executionLog: steps.map((step) => {
+        const originalNode = nodes.find((n) => n.id === step.nodeId) as any;
+        return {
+          nodeId: step.nodeId,
+          nodeTitle: originalNode?.title || "Unknown",
+          nodeType: originalNode?.type || "unknown",
+          status: step.status,
+          message: step.message,
+        };
+      }),
+    };
+  }
+
+  return result;
 };

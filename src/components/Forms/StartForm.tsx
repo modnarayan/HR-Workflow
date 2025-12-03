@@ -29,7 +29,7 @@ export const StartForm = ({ nodeId }: { nodeId: string }) => {
   ) => updateNodeData(nodeId, data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
       <Input {...register("title")} placeholder="Start Title" />
       {errors.title && <p className="text-red-500">{errors.title.message}</p>}
       <Button type="submit">Update</Button>

@@ -100,6 +100,82 @@ export const TestPanel = () => {
               </div>
             </div>
           )}
+
+          {result.summary && (
+            <div className="bg-blue-50 border border-blue-200 rounded p-3">
+              <h4 className="text-sm font-semibold text-blue-900 mb-2">
+                📋 Workflow Summary Report
+              </h4>
+              <div className="space-y-2 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-blue-700">Generated:</span>
+                  <span className="font-mono text-blue-900">
+                    {result.summary.generatedAt}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-blue-700">Status:</span>
+                  <span className="font-semibold text-blue-900">
+                    {result.summary.workflowStatus.toUpperCase()}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-blue-700">Steps Completed:</span>
+                  <span className="font-semibold text-blue-900">
+                    {result.summary.completedSteps} /{" "}
+                    {result.summary.totalSteps}
+                  </span>
+                </div>
+
+                <div className="border-t border-blue-200 pt-2 mt-2">
+                  <h5 className="text-blue-900 font-semibold mb-1">
+                    Execution Log:
+                  </h5>
+                  <div className="space-y-1 max-h-32 overflow-y-auto bg-white rounded p-2">
+                    {result.summary.executionLog.map(
+                      (
+                        log: {
+                          nodeId: string;
+                          nodeTitle: string;
+                          nodeType: string;
+                          status: string;
+                          message: string;
+                        },
+                        idx: number
+                      ) => (
+                        <div
+                          key={idx}
+                          className="text-xs border-b border-gray-200 pb-1 last:border-0"
+                        >
+                          <div className="flex items-start gap-1">
+                            <span
+                              className={`px-1.5 py-0.5 rounded text-white text-xs font-semibold whitespace-nowrap ${
+                                log.status === "completed"
+                                  ? "bg-green-500"
+                                  : log.status === "executing"
+                                  ? "bg-blue-500"
+                                  : "bg-gray-500"
+                              }`}
+                            >
+                              {log.status}
+                            </span>
+                            <div className="flex-1">
+                              <div className="font-semibold text-gray-900">
+                                {log.nodeTitle}
+                              </div>
+                              <div className="text-gray-600 text-xs">
+                                {log.nodeType} • {log.message}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

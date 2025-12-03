@@ -37,7 +37,7 @@ export const TaskForm = ({ nodeId }: { nodeId: string }) => {
   const onSubmit = (data: TaskFormData) => updateNodeData(nodeId, data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
       <div>
         <label className="block text-sm font-medium">Title</label>
         <Input {...register("title")} placeholder="Task title" />

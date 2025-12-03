@@ -32,7 +32,7 @@ export const ApprovalForm = ({ nodeId }: { nodeId: string }) => {
   const onSubmit = (data: ApprovalFormData) => updateNodeData(nodeId, data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
       <div>
         <label className="block text-sm font-medium">Title</label>
         <Input {...register("title")} placeholder="Approval step title" />

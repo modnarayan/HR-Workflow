@@ -63,4 +63,17 @@ export interface SimulationResult {
   steps: SimulationStep[];
   valid: boolean;
   errors: string[];
+  summary?: {
+    generatedAt: string;
+    totalSteps: number;
+    completedSteps: number;
+    workflowStatus: "success" | "failed";
+    executionLog: Array<{
+      nodeId: string;
+      nodeTitle: string;
+      nodeType: NodeType;
+      status: string;
+      message: string;
+    }>;
+  };
 }
