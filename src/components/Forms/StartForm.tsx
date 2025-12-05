@@ -33,9 +33,6 @@ export const StartForm = ({ nodeId }: { nodeId: string }) => {
       <Input {...register("title")} placeholder="Start Title" />
       {errors.title && <p className="text-red-500">{errors.title.message}</p>}
       <Button type="submit">Update</Button>
-      {/* Dynamic metadata as key-value inputs – expand if needed */}
     </form>
   );
 };
-
-// Replicate for other forms: Task adds assignee/dueDate, Approval adds role/threshold, Automated fetches actions and dynamic params, End adds message/summary toggle.
