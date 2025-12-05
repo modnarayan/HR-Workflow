@@ -367,19 +367,6 @@ npm run dev
 
 Navigate to `http://localhost:3000` to use the workflow designer.
 
-## 👤 Author
-
-GitHub Copilot / Assistance-based Development
-
-## 📞 Support
-
-For issues or questions, refer to:
-
-- [React Flow Documentation](https://reactflow.dev)
-- [React Hook Form Documentation](https://react-hook-form.com)
-- [Zod Documentation](https://zod.dev)
-- Tailwind for styling, inspired by ref images (flow + metrics panels).
-
 ## Completed
 
 - All 5 nodes with forms.
